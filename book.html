@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Your Event — CyberBirdies</title>
+<meta name="description" content="Check availability and reserve your CyberBirdies mobile golf simulator. $250/hour, 2 hour minimum, deposit held in crypto.">
+<link rel="icon" href="assets/logo.jpeg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/pay.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/logo.jpeg" alt="CyberBirdies logo"></a>
+  <nav class="site-nav">
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#faq">FAQ</a>
+  </nav>
+</header>
+
+<section class="book-head">
+  <div class="wrap">
+    <p class="eyebrow">Booking</p>
+    <h1>Let's put a date on it.</h1>
+    <p>We run a single booth, so only one event can be on the calendar at a
+       time. Pick your date and length, tell us about the space, and the deposit
+       locks it in. <span id="rate-line"></span></p>
+  </div>
+</section>
+
+<div class="wrap book-layout">
+
+  <form class="form-card" id="booking-form" onsubmit="return false;">
+
+    <div id="form-alert" class="hidden"></div>
+
+    <fieldset>
+      <legend>1 · Your event</legend>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="event-date">Event date</label>
+          <input type="date" id="event-date" required>
+        </div>
+        <div class="field">
+          <label for="hours">How long</label>
+          <select id="hours" required></select>
+        </div>
+      </div>
+
+      <div id="min-warn" class="alert alert-warn hidden">
+        The minimum booking is 2 hours.
+      </div>
+
+      <div class="field">
+        <label>Available start times <span class="hint">(pick your date and length first)</span></label>
+        <input type="hidden" id="start-time">
+        <div class="slot-list" id="slot-list">
+          <p class="slot-empty">Choose a date to see open times.</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Add-ons</legend>
+
+      <label class="check-row" for="generator">
+        <input type="checkbox" id="generator">
+        <span>
+          <strong>Generator power <span class="addon-price">+$50</span></strong>
+          <em>Only if your venue has no outlet within reach of the setup spot.
+              We bring the generator and the fuel.</em>
+        </span>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Where it's going</legend>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="venue-city">Venue city or ZIP</label>
+          <input type="text" id="venue-city" placeholder="Greensboro, NC or 27401" required>
+        </div>
+        <div class="field">
+          <label for="drive-hours">Driving time from <span id="area-label">Welcome, NC</span></label>
+          <select id="drive-hours" required>
+            <option value="">Select…</option>
+            <option value="0.5">Under 1 hour</option>
+            <option value="1">About 1 hour</option>
+            <option value="1.5">About 1.5 hours</option>
+            <option value="1.75">Close to 2 hours</option>
+            <option value="2.5">2 hours or more</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="drive-warn" class="alert alert-err hidden">
+        We book events closer than a <span id="drive-max">2</span> hour drive from
+        Welcome, NC. A 2 hour drive or more is outside our range. If you're right
+        at the edge, email us — we'll tell you honestly whether we can make it work.
+      </div>
+
+      <div class="field">
+        <label for="venue-address">Venue address <span class="hint">(optional for now)</span></label>
+        <input type="text" id="venue-address" placeholder="Street address if you have it">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="venue-type">Space type</label>
+          <select id="venue-type">
+            <option value="indoor-venue">Indoor venue / event hall</option>
+            <option value="garage">Garage or shop building</option>
+            <option value="covered-outdoor">Covered outdoor / tent</option>
+            <option value="home">Home</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ceiling">Ceiling height</label>
+          <select id="ceiling">
+            <option value="under-11">Under 11 ft 6 in</option>
+            <option value="11-12" selected>11 ft 6 in to 12 ft</option>
+            <option value="over-12">Over 12 ft</option>
+            <option value="unsure">Not sure</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Setup checklist</legend>
+      <p class="field-intro">
+        These four things decide whether the booth can be set up at your venue.
+        They are the reason a setup ever fails, so please check them now rather
+        than on the day. Pick "Not sure" and we'll work it out with you before
+        anything is charged.
+      </p>
+
+      <div class="checks">
+        <div class="check-item">
+          <label for="chk-space">Clear floor space of at least 16 × 20 ft</label>
+          <select id="chk-space">
+            <option value="yes">Yes, we have that much clear space</option>
+            <option value="maybe">We think so, but it's tight</option>
+            <option value="no">No, our space is smaller</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="check-item">
+          <label for="chk-level">Reasonably level ground</label>
+          <select id="chk-level">
+            <option value="yes">Yes, it's flat</option>
+            <option value="maybe">Slightly sloped, but usable</option>
+            <option value="no">Noticeably sloped or uneven</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="check-item">
+          <label for="chk-power">Electrical outlet within 50 feet</label>
+          <select id="chk-power">
+            <option value="yes">Yes, there's an outlet in reach</option>
+            <option value="no">No outlet within 50 ft</option>
+            <option value="generator">No outlet — we'd need your generator</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="check-item">
+          <label for="chk-wifi">WiFi in range of the hitting bay</label>
+          <select id="chk-wifi">
+            <option value="yes">Yes, signal reaches where the booth goes</option>
+            <option value="weak">Signal is weak out there</option>
+            <option value="no">No WiFi at the venue</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="setup-warn" class="alert alert-warn hidden"></div>
+      <div id="setup-block" class="alert alert-err hidden"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Who we're booking for</legend>
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" autocomplete="name" required>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="hint">(optional)</span></label>
+          <input type="tel" id="phone" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="notes">Anything we should know? <span class="hint">(optional)</span></label>
+        <textarea id="notes" placeholder="Tournament format, number of guests, access details, elevator or stairs, anything unusual about the space."></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>6 · How you'd like to pay</legend>
+      <div id="pay-methods" class="pay-methods"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>7 · Terms &amp; conditions</legend>
+
+      <div class="terms-box">
+        <h4>Rental Agreement &amp; Damage Liability — Summary</h4>
+
+        <p><strong>By booking, you accept full financial liability for any
+        damage to, or loss of, CyberBirdies equipment.</strong> This applies to
+        damage caused by you, and also by anyone at your event — your employees,
+        guests, customers, contractors, family members, and children.</p>
+
+        <p><strong>What you'll be charged:</strong> the full cost of repair for
+        damage, or the full replacement cost of the item if it is destroyed,
+        lost, or stolen. If the damage puts equipment out of service, you also
+        pay <strong>$250 per hour</strong> for rental time lost while it is
+        unavailable. You also cover our collection and legal costs if we have to
+        pursue what is owed.</p>
+
+        <p><strong>This applies regardless of fault.</strong> Our staff being
+        present at your event does not reduce your liability, and no finding of
+        carelessness or negligence on your part is required.</p>
+
+        <p><strong>Examples of damage we charge for:</strong> punctures, tears,
+        or burns to the booth; a damaged projector screen; cracked or broken
+        cameras, lenses, housings, or sensors on the launch monitor; a damaged
+        hitting mat; liquid damage to the laptop; missing cables, mounts, or
+        stands; theft of any item; and damage from misuse, unsupervised children,
+        or animals.</p>
+
+        <p><strong>You must report damage before we leave the premises.</strong>
+        Theft or intentional damage may be reported to law enforcement.</p>
+
+        <p class="terms-more">
+          The complete agreement — including cancellation terms, site
+          requirements, and liability provisions — is set out in full in our
+          <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
+          The summary above does not limit those terms.
+        </p>
+      </div>
+
+      <label class="terms-agree" for="agree-terms">
+        <input type="checkbox" id="agree-terms">
+        <span>
+          <strong>I have read and agree to the Terms &amp; Conditions, Rental
+          Agreement, and Damage Liability terms.</strong>
+          <em>Including that I am financially liable for any damage to or loss of
+          CyberBirdies equipment caused by me, my guests, or my customers.</em>
+        </span>
+      </label>
+
+      <div id="terms-warn" class="alert alert-warn hidden">
+        You must agree to the terms before you can pay.
+      </div>
+    </fieldset>
+
+    <button type="button" class="btn btn-primary btn-lg" id="pay-btn" style="width:100%">
+      Reserve &amp; pay
+    </button>
+    <p class="fineprint" id="validation-msg"></p>
+
+    <div id="checkout-box" class="hidden" style="margin-top:24px">
+      <div class="alert alert-ok">
+        Date reserved. Booking reference: <strong id="invoice-ref"></strong>.
+      </div>
+
+      <div id="square-box" class="hidden">
+        <p class="pay-lead">
+          Finish your payment of <strong id="square-amount"></strong> through
+          Square. Card, Cash App Pay, and Afterpay are all accepted.
+        </p>
+        <a id="square-link" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener" style="width:100%;text-align:center">
+          Pay with Square
+        </a>
+      </div>
+
+      <div id="crypto-box" class="hidden">
+        <p class="pay-lead">
+          Finish your deposit in cryptocurrency. The invoice is open and your
+          slot is held while you pay.
+        </p>
+        <a id="checkout-link" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener" style="width:100%;text-align:center">
+          Go to crypto checkout
+        </a>
+      </div>
+
+      <p class="fineprint">
+        If payment doesn't complete, the date returns to the calendar
+        automatically. Cancellations with at least 7 days' notice can be
+        transferred to another available date within 6 months.
+      </p>
+    </div>
+  </form>
+
+  <aside class="summary">
+    <div class="summary-card">
+      <h3>Your booking</h3>
+
+      <div class="sum-line"><span>Rate</span><strong>$250 / hour</strong></div>
+      <div class="sum-line"><span>Length</span><span id="sum-hours"><strong>—</strong></span></div>
+      <div class="sum-line"><span>Start</span><span id="sum-start">—</span></div>
+      <div class="sum-line"><span>Generator</span><span id="sum-generator">—</span></div>
+      <div class="sum-line"><span>Deposit to confirm</span><strong id="sum-deposit">$0</strong></div>
+
+      <div class="sum-total">
+        <span>Total</span>
+        <span class="amt" id="sum-total">$0</span>
+      </div>
+
+      <p class="sum-note">
+        <span id="deposit-note"></span><br><br>
+        Payments are accepted in cryptocurrency. The booking creates an invoice
+        and you pay from any wallet — no account needed on your end.
+      </p>
+    </div>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom" style="border-top:0;padding-top:0">
+    <p><a href="index.html">CyberBirdies</a> · Mobile golf simulator rental · Welcome, NC</p>
+    <p style="margin-top:10px"><a href="terms.html">Terms &amp; Waiver</a> · <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="assets/booking.js"></script>
+</body>
+</html>

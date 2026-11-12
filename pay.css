@@ -1,0 +1,57 @@
+/* ============================================================
+   CyberBirdies — payment method + add-on pickers
+   Loaded after style.css.
+   ============================================================ */
+
+.pay-methods { display: grid; gap: 12px; }
+
+.pay-option,
+.check-row {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--black);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.pay-option:hover,
+.check-row:hover { border-color: var(--grey-2); }
+
+.pay-option.selected {
+  border-color: var(--magenta);
+  background: rgba(255,31,143,.05);
+}
+
+.pay-option input,
+.check-row input {
+  margin: 3px 0 0;
+  accent-color: var(--magenta);
+  width: 18px; height: 18px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.pay-option span,
+.check-row span { display: flex; flex-direction: column; gap: 4px; }
+
+.pay-option strong,
+.check-row strong { color: var(--white); font-size: 15.5px; font-weight: 700; }
+
+.pay-option em,
+.check-row em {
+  color: var(--grey-2);
+  font-style: normal;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.addon-price { color: var(--gold); font-weight: 700; }
+
+.pay-lead {
+  color: var(--grey);
+  font-size: 15px;
+  margin: 0 0 16px;
+}
+.pay-lead strong { color: var(--white); }

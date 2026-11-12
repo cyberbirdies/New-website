@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finish your payment — CyberBirdies</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/logo.jpeg" alt="CyberBirdies logo"></a>
+</header>
+<section class="band" style="padding-top:80px">
+  <div class="wrap" style="max-width:640px">
+    <div id="demo-banner" class="alert alert-warn hidden">
+      <strong>Demo mode.</strong> No payment provider is connected yet, so no
+      real invoice was created and no crypto is due.
+    </div>
+    <h1 style="font-size:38px">Waiting on your deposit.</h1>
+    <p class="lede">Your slot is held while the invoice is open. Once the
+    network confirms the payment, we'll email your confirmation and the date is
+    yours. If the payment doesn't confirm, the slot returns to the calendar.</p>
+    <p class="fineprint">Booking reference: <strong id="ref">—</strong></p>
+    <p style="margin-top:34px"><a href="index.html" class="btn btn-ghost">Back to home</a></p>
+  </div>
+</section>
+<script>
+  const p = new URLSearchParams(location.search);
+  document.getElementById("ref").textContent = p.get("ref") || "(not provided)";
+  if (p.get("demo")) document.getElementById("demo-banner").classList.remove("hidden");
+</script>
+</body>
+</html>
